@@ -69,8 +69,8 @@
             return this;
         },
 
-        /*  API method: transit to a particular page element  */
-        transit: function (pageId, transition) {
+        /*  API method: transition to a particular page element  */
+        transition: function (pageId, transition) {
             var self = this;
 
             /*  sanity check arguments  */
