@@ -65,11 +65,11 @@
             if (!page)
                 throw new Error("no such page \"" + pageId + "\" found");
             if ($(page).hasClass("jquery-page-active")) {
-                var others = $(page).page().pages().filter(function (id) {
+                var others = self.pages().filter(function (id) {
                     return id !== pageId;
                 });
                 if (others.length > 0)
-                    $(page).page().transition(others[0], "none");
+                    self.transition(others[0], "none");
             }
             $(page).remove();
 
@@ -109,9 +109,17 @@
 
             /*  get from/to pages  */
             var pageFr = $("> .jquery-page-container > .jquery-page-active", self.root);
+            if (pageFr.length === 0)
+                throw new Error("internal error: no active page found");
+            if (pageFr.length > 1)
+                throw new Error("internal error: more than one active page found");
             var pageTo = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
                 return $(el).attr("data-jquery-page-name") === pageId;
             });
+            if (pageTo.length === 0)
+                throw new Error("no such page \"" + pageId + "\" found");
+            if (pageTo.length > 1)
+                throw new Error("more than one page with id \"" + pageId + "\" found");
 
             /*  determine page dimensions  */
             var pageWidth  = $(self.root).width();
