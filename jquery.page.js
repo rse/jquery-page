@@ -322,7 +322,11 @@
 
                     /*  sanity check and prepare container element  */
                     var container = $("> *", this);
-                    if (container.length !== 1)
+                    if (container.length === 0) {
+                        container = $("<div></div>");
+                        $(this).append(container);
+                    }
+                    else if (container.length !== 1)
                         throw new Error("require a single container element under jQuery Page root element");
                     $(container)
                         .addClass("jquery-page-container");
