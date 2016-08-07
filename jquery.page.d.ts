@@ -1,5 +1,5 @@
 /*!
-**  jQuery Page -- jQuery Page Transitions
+**  jQuery Page -- jQuery Page Transitions for HTML5 Single-Page-Apps
 **  Copyright (c) 2016 Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining

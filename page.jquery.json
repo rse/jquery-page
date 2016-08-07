@@ -1,7 +1,7 @@
 {
     "name": "page",
     "title": "jQuery Page",
-    "description": "jQuery Page is a jQuery plugin for slide/flip-transitioning between pages",
+    "description": "jQuery Page Transitions for HTML5 Single-Page-Apps",
     "version": "0.9.0",
     "author": {
         "name": "Ralf S. Engelschall",

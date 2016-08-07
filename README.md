@@ -1,14 +1,15 @@
 
 jQuery Page
-============
+===========
 
-(jQuery Page Transitions)
+jQuery Page Transitions for HTML5 Single-Page-Apps
 
 Abstract
 --------
 
 jQuery Page is a [jQuery](http://jquery.com/) plugin for
-slide/flip-transitioning between page elements.
+mobile-style slide/flip-transitioning between page elements in HTML5
+Single-Page-Apps.
 
 Demo
 ----
@@ -19,12 +20,20 @@ for a small demonstration of jQuery Page.
 Motivation
 ----------
 
-A Single-Page Application (SPA) usually...
+Mobile HTML5 Single-Page Applications (SPA) usually place their app
+content onto individual pages and switch between those pages with slide
+and flip transition effects. jQuery Page provides the required raw page
+transitions only.
 
 Solution
 --------
 
-jQuery Page...
+jQuery Page allows arbitrary page elements to be added to an invisible
+intermediate container element which is in turn placed into a visible
+constraining outmost screen container element. At each time only one
+page element is visible. On transitioning jQuery Page enables both the
+from/old and the to/new page element and uses the intermediate container
+element to provide a visually appealing transition effect.
 
 API
 ---
