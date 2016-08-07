@@ -33,7 +33,8 @@ intermediate container element which is in turn placed into a visible
 constraining outmost screen container element. At each time only one
 page element is visible. On transitioning jQuery Page enables both the
 from/old and the to/new page element and uses the intermediate container
-element to provide a visually appealing transition effect.
+element to provide a visually appealing transition effect. jQuery Page
+under the hood uses CSS transitions to perform the visual effect.
 
 API
 ---
