@@ -62,7 +62,7 @@
             var page = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
                 return $(el).attr("data-jquery-page-name") === pageId;
             });
-            if (!page)
+            if (page.length === 0)
                 throw new Error("no such page \"" + pageId + "\" found");
             if ($(page).hasClass("jquery-page-active")) {
                 var others = self.pages().filter(function (id) {
