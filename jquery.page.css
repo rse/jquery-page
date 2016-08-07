@@ -69,9 +69,9 @@
     transition: all 0.5s ease-in-out;
 }
 .jquery-page .jquery-page-container.jquery-page-shake {
-    animation: shake 0.50s cubic-bezier(.36, .07, .19, .97) both;
+    animation: jquery-page-shake 0.50s cubic-bezier(.36, .07, .19, .97) both;
 }
-@keyframes shake {
+@keyframes jquery-page-shake {
     10%, 90%      { transform: translateX(-1px); }
     20%, 80%      { transform: translateX( 2px); }
     30%, 50%, 70% { transform: translateX(-4px); }
@@ -81,7 +81,7 @@
 /*  the page(s)  */
 .jquery-page .jquery-page-front,
 .jquery-page .jquery-page-back {
-    z-index: 1;
+    z-index: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -101,6 +101,6 @@
     order: 2;
 }
 .jquery-page .jquery-page-disabled {
-    display: none;
+    display: none !important;
 }
 
