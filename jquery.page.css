@@ -54,22 +54,24 @@
     flex-direction: column;
     flex-wrap: none;
 }
+.jquery-page .jquery-page-container.jquery-page-flip-left,
 .jquery-page .jquery-page-container.jquery-page-flip-right {
-    transform: perspective(400px) rotateY(180deg);
     transition: all 0.5s ease-in-out;
     box-shadow: 0 0 40px #333333;
 }
 .jquery-page .jquery-page-container.jquery-page-flip-left {
     transform: perspective(400px) rotateY(-180deg);
-    transition: all 0.5s ease-in-out;
-    box-shadow: 0 0 40px #333333;
+}
+.jquery-page .jquery-page-container.jquery-page-flip-right {
+    transform: perspective(400px) rotateY(180deg);
 }
 .jquery-page .jquery-page-container.jquery-page-slide {
     transition: all 0.5s ease-in-out;
 }
 
 /*  the page(s)  */
-.jquery-page .jquery-page-front {
+.jquery-page .jquery-page-front,
+.jquery-page .jquery-page-back {
     z-index: 1;
     position: absolute;
     top: 0;
@@ -79,24 +81,13 @@
     backface-visibility: hidden;
 }
 .jquery-page .jquery-page-back {
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -moz-backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     transform: perspective(400px) rotateY(180deg);
 }
-.jquery-page .jquery-page-left {
-    order: 1;
-}
-.jquery-page .jquery-page-right {
-    order: 2;
-}
+.jquery-page .jquery-page-left,
 .jquery-page .jquery-page-top {
     order: 1;
 }
+.jquery-page .jquery-page-right,
 .jquery-page .jquery-page-bottom {
     order: 2;
 }
