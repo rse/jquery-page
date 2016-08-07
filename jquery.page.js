@@ -92,6 +92,29 @@
             return pages;
         },
 
+        /*  API method: shake current page element  */
+        shake: function () {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 0)
+                throw new Error("invalid number of arguments");
+
+            /*  apply effect  */
+            var pageCo = $("> .jquery-page-container", self.root);
+            var pageWidth  = $(self.root).width();
+            $(pageCo)
+                .width(pageWidth)
+                .addClass("jquery-page-shake")
+                .one("animationend", function () {
+                    $(pageCo)
+                        .css("width", "")
+                        .removeClass("jquery-page-shake");
+                });
+
+            return this;
+        },
+
         /*  API method: transition to a particular page element  */
         transition: function (pageId, transition) {
             var self = this;
@@ -239,6 +262,8 @@
             }
             else
                 throw new Error("invalid transition type");
+
+            return this;
         }
     };
 

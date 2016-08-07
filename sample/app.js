@@ -12,6 +12,9 @@
             var id = $(".remove-input").val();
             $(".screen").page().remove(id);
         });
+        $(".shake-button").click(function () {
+            $(".screen").page().shake();
+        });
     });
 })(jQuery);
 
