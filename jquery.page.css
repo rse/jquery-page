@@ -54,8 +54,13 @@
     flex-direction: column;
     flex-wrap: none;
 }
-.jquery-page .jquery-page-container.jquery-page-flip {
+.jquery-page .jquery-page-container.jquery-page-flip-right {
     transform: perspective(400px) rotateY(180deg);
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 0 40px #333333;
+}
+.jquery-page .jquery-page-container.jquery-page-flip-left {
+    transform: perspective(400px) rotateY(-180deg);
     transition: all 0.5s ease-in-out;
     box-shadow: 0 0 40px #333333;
 }
