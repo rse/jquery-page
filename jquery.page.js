@@ -64,9 +64,32 @@
             });
             if (!page)
                 throw new Error("no such page \"" + pageId + "\" found");
+            if ($(page).hasClass("jquery-page-active")) {
+                var others = $(page).page().pages().filter(function (id) {
+                    return id !== pageId;
+                });
+                if (others.length > 0)
+                    $(page).page().transition(others[0], "none");
+            }
             $(page).remove();
 
             return this;
+        },
+
+        /*  API method: fetch ids of all existing page elements  */
+        pages: function () {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 0)
+                throw new Error("invalid number of arguments");
+
+            /*  find all pages  */
+            var pages = [];
+            $("> .jquery-page-container > *", self.root).each(function () {
+                pages.push($(this).attr("data-jquery-page-name"));
+            });
+            return pages;
         },
 
         /*  API method: transition to a particular page element  */
