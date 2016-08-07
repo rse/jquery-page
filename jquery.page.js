@@ -138,7 +138,7 @@
                     });
             }
             else if ((m = transition.match(/^flip-towards-(left|right)$/)) !== null) {
-                /*  TRANSITION: flop towards left/right  */
+                /*  TRANSITION: flip towards left/right  */
                 to = m[1];
                 $(pageCo)
                     .addClass("jquery-page-stacked")
