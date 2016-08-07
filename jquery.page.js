@@ -24,7 +24,7 @@
 
 /* global jQuery: false */
 (function ($) {
-    /*  internal class  */
+    /*  internal API class  */
     var Page = function (root) {
         this.root = root;
     };
@@ -217,17 +217,26 @@
         page: function () {
             var result = null;
             this.each(function () {
+                /*  determine attached API  */
                 var api = $(this).data("jquery-page-api");
                 if (!api) {
+                    /*  create new attached API and prepare root element  */
                     api = new Page(this);
                     $(this)
                         .data("jquery-page-api", api)
                         .addClass("jquery-page");
-                    $("> *", this)
+
+                    /*  sanity check and prepare container element  */
+                    var container = $("> *", this);
+                    if (container.length !== 1)
+                        throw new Error("require a single container element under jQuery Page root element");
+                    $(container)
                         .addClass("jquery-page-container");
-                    $("> * > *", this)
+
+                    /*  prepare already existing page elements  */
+                    $("> *", container)
                         .addClass("jquery-page-disabled");
-                    $("> * > *:first", this)
+                    $("> *:first", container)
                         .removeClass("jquery-page-disabled")
                         .addClass("jquery-page-active");
                 }
