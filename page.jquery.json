@@ -1,0 +1,25 @@
+{
+    "name": "page",
+    "title": "jQuery Page",
+    "description": "jQuery Page is a jQuery plugin for slide/flip-transitioning between pages",
+    "version": "0.9.0",
+    "author": {
+        "name": "Ralf S. Engelschall",
+        "email": "rse@engelschall.com",
+        "url": "http://engelschall.com"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://opensource.org/licenses/MIT"
+    }],
+    "dependencies": {
+        "jquery": ">=1.3"
+    },
+    "keywords": [
+        "page", "transition", "slide", "flip"
+    ],
+    "homepage": "https://github.com/rse/jquery-page",
+    "docs":     "https://github.com/rse/jquery-page",
+    "download": "https://raw.github.com/rse/jquery-page/0.9.0/jquery.page.js",
+    "bugs":     "https://github.com/rse/jquery-page/issues"
+}

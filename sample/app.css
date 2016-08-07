@@ -1,0 +1,59 @@
+
+html, body {
+    background-color: #999999;
+}
+
+.device {
+    width:  250px;
+    height: 450px;
+    background-color: #333333;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 12px 12px 12px 12px;
+    background: linear-gradient(to bottom, #404040  0%, #333333  49%, #282828 51%, #222222 100%);
+}
+
+.device .screen {
+    width:  100%;
+    height: 100%;
+    background-color: #666666;
+}
+
+.device .screen .page {
+    width:  100%;
+    height: 100%;
+    color:  white;
+    font-family: sans-serif;
+}
+
+.device .screen .page[data-page='11'] {
+    background-color: red;
+}
+.device .screen .page[data-page='12'] {
+    background-color: purple;
+}
+.device .screen .page[data-page='21'] {
+    background-color: green;
+}
+.device .screen .page[data-page='22'] {
+    background-color: blue;
+}
+.device .screen .page[data-page='XX'] {
+    background-color: orange;
+}
+
+.device .screen .page .title {
+    width: 100%;
+    font-weight: bold;
+    font-size: 20pt;
+    text-align: center;
+}
+
+.device .screen .page .navigate {
+    border: 1px solid white;
+    margin: 5px;
+    padding: 5px;
+    width: 90%;
+    text-align: center;
+}
+

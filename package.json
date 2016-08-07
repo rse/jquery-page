@@ -1,0 +1,42 @@
+{
+    "name":        "jquery-page",
+    "version":     "0.9.0",
+    "description": "jQuery Page is a jQuery plugin for slide/flip-transitioning between pages",
+    "main":        "jquery.page.js",
+    "keywords":    [
+        "jquery-plugin", "ecosystem:jquery",
+        "jquery", "page",
+        "page", "transition", "slide", "flip"
+    ],
+    "scripts": {
+        "test": "grunt"
+    },
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/rse/jquery-page.git"
+    },
+    "author": {
+        "name":  "Ralf S. Engelschall",
+        "email": "rse@engelschall.com",
+        "url":   "http://engelschall.com"
+    },
+    "licenses": [{
+        "type": "MIT",
+        "url":  "http://opensource.org/licenses/MIT"
+    }],
+    "homepage": "https://github.com/rse/jquery-page",
+    "bugs":     "https://github.com/rse/jquery-page/issues",
+    "devDependencies": {
+        "grunt":                "~1.0.1",
+        "grunt-cli":            "~1.2.0",
+        "grunt-contrib-jshint": "~1.0.0",
+        "grunt-contrib-uglify": "~2.0.0",
+        "grunt-contrib-clean":  "~1.0.0",
+        "grunt-eslint":         "~19.0.0",
+        "gulp":                 "~3.9.1",
+        "gulp-rename":          "~1.2.2",
+        "gulp-jshint":          "~2.0.1",
+        "gulp-eslint":          "~3.0.1",
+        "gulp-uglify":          "~1.5.4"
+    }
+}
