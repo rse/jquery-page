@@ -92,6 +92,27 @@
             return pages;
         },
 
+        /*  API method: get element of particular page  */
+        page: function (pageId) {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length === 0)
+                throw new Error("missing page id");
+            else if (arguments.length === 1 && typeof pageId !== "string")
+                throw new Error("invalid page id argument (string expected)");
+
+            /*  get page element  */
+            var pageTo = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
+                return $(el).attr("data-jquery-page-name") === pageId;
+            });
+            if (pageTo.length > 1)
+                throw new Error("more than one page with id \"" + pageId + "\" found");
+            if (pageTo.length === 0)
+                return null;
+            return pageTo.get(0);
+        },
+
         /*  API method: shake current page element  */
         shake: function () {
             var self = this;

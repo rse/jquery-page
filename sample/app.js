@@ -5,7 +5,10 @@
         $(".screen .page .navigate").click(function (ev) {
             var page  = $(ev.target).attr("data-page-name");
             var trans = $(ev.target).attr("data-page-trans");
-            $(".screen").page().transition(page, trans);
+            if ($(".screen").page().page(page) === null)
+                $(".screen").page().shake();
+            else
+                $(".screen").page().transition(page, trans);
         });
         $(".screen").page().transition("11", "none");
         $(".remove-button").click(function () {
