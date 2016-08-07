@@ -65,7 +65,7 @@
             if (page.length === 0)
                 throw new Error("no such page \"" + pageId + "\" found");
             if ($(page).hasClass("jquery-page-active")) {
-                var others = self.pages().filter(function (id) {
+                var others = self.existing().filter(function (id) {
                     return id !== pageId;
                 });
                 if (others.length > 0)
