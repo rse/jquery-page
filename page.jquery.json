@@ -2,7 +2,7 @@
     "name": "page",
     "title": "jQuery Page",
     "description": "jQuery Page Transitions for HTML5 Single-Page-Apps",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "author": {
         "name": "Ralf S. Engelschall",
         "email": "rse@engelschall.com",
@@ -20,6 +20,6 @@
     ],
     "homepage": "https://github.com/rse/jquery-page",
     "docs":     "https://github.com/rse/jquery-page",
-    "download": "https://raw.github.com/rse/jquery-page/0.9.1/jquery.page.js",
+    "download": "https://raw.github.com/rse/jquery-page/0.9.2/jquery.page.js",
     "bugs":     "https://github.com/rse/jquery-page/issues"
 }
