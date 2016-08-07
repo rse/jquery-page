@@ -47,6 +47,8 @@ html, body {
     font-weight: bold;
     font-size: 20pt;
     text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .device .screen .page .navigate {
