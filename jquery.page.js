@@ -32,6 +32,45 @@
             this.options.dataName = "page";
     };
     Page.prototype = {
+
+        /*  API method: insert new page element  */
+        insert: function (pageId, el) {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 2)
+                throw new Error("invalid number of arguments");
+            if (typeof pageId !== "string")
+                throw new Error("invalid page id argument (string expected)");
+
+            /*  append element  */
+            $("> .jquery-page-container", self.root)
+                .append($(el).attr("data-" + self.options.dataName, pageId));
+            return this;
+        },
+
+        /*  API method: remove existing page element  */
+        remove: function (pageId) {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 1)
+                throw new Error("invalid number of arguments");
+            if (typeof pageId !== "string")
+                throw new Error("invalid page id argument (string expected)");
+
+            /*  remove element  */
+            var page = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
+                return $(el).attr("data-" + self.options.dataName) === pageId;
+            });
+            if (!page)
+                throw new Error("no such page \"" + pageId + "\" found");
+            $(page).remove();
+
+            return this;
+        },
+
+        /*  API method: transit to a particular page element  */
         transit: function (pageId, transition) {
             var self = this;
 
@@ -44,11 +83,11 @@
                 throw new Error("invalid transition type argument (string expected)");
 
             /*  get page container  */
-            var pageCo = $(".jquery-page-container", self.root);
+            var pageCo = $("> .jquery-page-container", self.root);
 
             /*  get from/to pages  */
-            var pageFr = $(".jquery-page-container > .jquery-page-active", self.root);
-            var pageTo = $(".jquery-page-container > *", self.root).filter(function (idx, el) {
+            var pageFr = $("> .jquery-page-container > .jquery-page-active", self.root);
+            var pageTo = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
                 return $(el).attr("data-" + self.options.dataName) === pageId;
             });
 
