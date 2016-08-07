@@ -1,9 +1,7 @@
 
 (function ($) {
     $(document).ready(function () {
-        $(".screen").page({
-            dataName: "page",
-        });
+        $(".screen").page();
         $(".screen .page .navigate").click(function (ev) {
             var page  = $(ev.target).attr("data-page-name");
             var trans = $(ev.target).attr("data-page-trans");

@@ -26,19 +26,19 @@ html, body {
     font-family: sans-serif;
 }
 
-.device .screen .page[data-page='11'] {
+.device .screen .page[data-jquery-page-name='11'] {
     background-color: red;
 }
-.device .screen .page[data-page='12'] {
+.device .screen .page[data-jquery-page-name='12'] {
     background-color: purple;
 }
-.device .screen .page[data-page='21'] {
+.device .screen .page[data-jquery-page-name='21'] {
     background-color: green;
 }
-.device .screen .page[data-page='22'] {
+.device .screen .page[data-jquery-page-name='22'] {
     background-color: blue;
 }
-.device .screen .page[data-page='XX'] {
+.device .screen .page[data-jquery-page-name='XX'] {
     background-color: orange;
 }
 

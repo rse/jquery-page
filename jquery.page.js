@@ -25,14 +25,10 @@
 /* global jQuery: false */
 (function ($) {
     /*  internal class  */
-    var Page = function (root, options) {
-        this.root    = root;
-        this.options = options;
-        if (this.options.dataName === undefined)
-            this.options.dataName = "page";
+    var Page = function (root) {
+        this.root = root;
     };
     Page.prototype = {
-
         /*  API method: insert new page element  */
         insert: function (pageId, el) {
             var self = this;
@@ -46,7 +42,7 @@
             /*  append element  */
             $("> .jquery-page-container", self.root).append(
                 $(el)
-                    .attr("data-" + self.options.dataName, pageId)
+                    .attr("data-jquery-page-name", pageId)
                     .addClass("jquery-page-disabled")
             );
             return this;
@@ -64,7 +60,7 @@
 
             /*  remove element  */
             var page = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
-                return $(el).attr("data-" + self.options.dataName) === pageId;
+                return $(el).attr("data-jquery-page-name") === pageId;
             });
             if (!page)
                 throw new Error("no such page \"" + pageId + "\" found");
@@ -91,7 +87,7 @@
             /*  get from/to pages  */
             var pageFr = $("> .jquery-page-container > .jquery-page-active", self.root);
             var pageTo = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
-                return $(el).attr("data-" + self.options.dataName) === pageId;
+                return $(el).attr("data-jquery-page-name") === pageId;
             });
 
             /*  determine page dimensions  */
@@ -218,13 +214,14 @@
     /*  hook into jQuery (locally)  */
     $.fn.extend({
         /*  API method  */
-        page: function (options) {
-            if (arguments.length === 1 && typeof options === "object") {
-                /*   case 1: apply Page functionality  */
-                this.each(function () {
-                    var page = new Page(this, options);
+        page: function () {
+            var result = null;
+            this.each(function () {
+                var api = $(this).data("jquery-page-api");
+                if (!api) {
+                    api = new Page(this);
                     $(this)
-                        .data("jquery-page", page)
+                        .data("jquery-page-api", api)
                         .addClass("jquery-page");
                     $("> *", this)
                         .addClass("jquery-page-container");
@@ -233,14 +230,10 @@
                     $("> * > *:first", this)
                         .removeClass("jquery-page-disabled")
                         .addClass("jquery-page-active");
-                });
-                return this;
-            }
-            else if (arguments.length === 0)
-                /*  case 2: find Page API  */
-                return $(this).data("jquery-page");
-            else
-                throw new Error("invalid arguments");
+                }
+                result = api;
+            });
+            return result;
         }
     });
 })(jQuery);
