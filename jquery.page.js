@@ -170,9 +170,9 @@
 
             /*  get from/to pages  */
             var pageFr = $("> .jquery-page-container > .jquery-page-active", self.root);
-            if (pageFr.length === 0)
+            if (transition !== "none" && pageFr.length === 0)
                 throw new Error("internal error: no active page found");
-            if (pageFr.length > 1)
+            if (transition !== "none" && pageFr.length > 1)
                 throw new Error("internal error: more than one active page found");
             var pageTo = $("> .jquery-page-container > *", self.root).filter(function (idx, el) {
                 return $(el).attr("data-jquery-page-name") === pageId;
