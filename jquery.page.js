@@ -44,8 +44,11 @@
                 throw new Error("invalid page id argument (string expected)");
 
             /*  append element  */
-            $("> .jquery-page-container", self.root)
-                .append($(el).attr("data-" + self.options.dataName, pageId));
+            $("> .jquery-page-container", self.root).append(
+                $(el)
+                    .attr("data-" + self.options.dataName, pageId)
+                    .addClass("jquery-page-disabled")
+            );
             return this;
         },
 
