@@ -76,24 +76,8 @@
             return this;
         },
 
-        /*  API method: fetch ids of all existing page elements  */
-        pages: function () {
-            var self = this;
-
-            /*  sanity check arguments  */
-            if (arguments.length !== 0)
-                throw new Error("invalid number of arguments");
-
-            /*  find all pages  */
-            var pages = [];
-            $("> .jquery-page-container > *", self.root).each(function () {
-                pages.push($(this).attr("data-jquery-page-name"));
-            });
-            return pages;
-        },
-
-        /*  API method: get element of particular page  */
-        page: function (pageId) {
+        /*  API method: fetch element of particular page  */
+        fetch: function (pageId) {
             var self = this;
 
             /*  sanity check arguments  */
@@ -111,6 +95,39 @@
             if (pageTo.length === 0)
                 return null;
             return pageTo.get(0);
+        },
+
+        /*  API method: fetch ids of all existing page elements  */
+        existing: function () {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 0)
+                throw new Error("invalid number of arguments");
+
+            /*  find all pages  */
+            var pages = [];
+            $("> .jquery-page-container > *", self.root).each(function () {
+                pages.push($(this).attr("data-jquery-page-name"));
+            });
+            return pages;
+        },
+
+        /*  API method: get id of currently active element  */
+        active: function () {
+            var self = this;
+
+            /*  sanity check arguments  */
+            if (arguments.length !== 0)
+                throw new Error("invalid number of arguments");
+
+            /*  get id of currently active page element  */
+            var pageActive = $("> .jquery-page-container > .jquery-page-active", self.root);
+            if (pageActive.length === 0)
+                throw new Error("internal error: no active page found");
+            if (pageActive.length > 1)
+                throw new Error("internal error: more than one active page found");
+            return pageActive.attr("data-jquery-page-name");
         },
 
         /*  API method: shake current page element  */

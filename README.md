@@ -42,14 +42,53 @@ API
 The Application Programming Interface (API) of jQuery Page is
 (in TypeScript definition syntax):
 
-    /*  the jQuery Stage Callback function type  */
-    interface JQueryStageCB {
-        (ev: JQueryEventObject, stage: JQueryStageInfo, stageOld: JQueryStageInfo): any;
+    /*  the jQuery Page API  */
+    interface JQueryPage {
+        /*  STRUCTURE: insert page element under unique id  */
+        insert(
+            pageId: string,
+            pageEl: HTMLElement
+        ): jQueryPage;
+
+        /*  STRUCTURE: remove page element by unique id  */
+        remove(
+            pageId: string
+        ): jQueryPage;
+
+        /*  STRUCTURE: fetch page element by unique id  */
+        fetch(
+            pageId: string
+        ): HTMLElement;
+
+        /*  STATUS: get unique ids of all page elements  */
+        existing(): string[];
+
+        /*  STATUS: get unique id of currently active page element  */
+        active(): string;
+
+        /*  VISUAL EFFECT: shake the currently active page element  */
+        shake(): jQueryPage;
+
+        /*  VISUAL EFFECT: transition to a particular page element.
+            Known transition types are:
+            - none
+            - slide-in-from-left
+            - slide-in-from-right
+            - slide-in-from-top
+            - slide-in-from-bottom
+            - flip-towards-left
+            - flip-towards-right
+         */
+        transition(
+            pageId: string,
+            transitionType: string
+        ): jQueryPage;
     }
 
-    /*  extend the dynamic jQuery result object API extension (provided by jquery.d.ts)  */
+    /*  the (extended) jQuery API  */
     interface JQuery {
-        page(): JQuery;
+        /*  create and attach or just retrieve jQuery Page API of queried element(s)  */
+        page(): JQueryPage;
     }
 
 Getting jQuery-Page
