@@ -49,7 +49,9 @@ interface JQueryPage {
     active(): string;
 
     /*  VISUAL EFFECT: shake the currently active page element  */
-    shake(): jQueryPage;
+    shake(
+        complete?: () => void
+    ): jQueryPage;
 
     /*  VISUAL EFFECT: transition to a particular page element.
         Known transition types are:
@@ -63,7 +65,8 @@ interface JQueryPage {
      */
     transition(
         pageId: string,
-        transitionType: string
+        transitionType: string,
+        complete?: (pageId: string) => void
     ): jQueryPage;
 }
 

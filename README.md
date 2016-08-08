@@ -67,7 +67,9 @@ The Application Programming Interface (API) of jQuery Page is
         active(): string;
 
         /*  VISUAL EFFECT: shake the currently active page element  */
-        shake(): jQueryPage;
+        shake(
+            complete?: () => void
+        ): jQueryPage;
 
         /*  VISUAL EFFECT: transition to a particular page element.
             Known transition types are:
@@ -81,7 +83,8 @@ The Application Programming Interface (API) of jQuery Page is
          */
         transition(
             pageId: string,
-            transitionType: string
+            transitionType: string,
+            complete?: (pageId: string) => void
         ): jQueryPage;
     }
 

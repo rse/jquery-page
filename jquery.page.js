@@ -131,12 +131,14 @@
         },
 
         /*  API method: shake current page element  */
-        shake: function () {
+        shake: function (complete) {
             var self = this;
 
             /*  sanity check arguments  */
-            if (arguments.length !== 0)
-                throw new Error("invalid number of arguments");
+            if (arguments.length < 0 || arguments.length > 1)
+                throw new Error("invalid number of arguments (0 or 1 expected)");
+            else if (arguments.length === 1 && typeof complete !== "function")
+                throw new Error("invalid complete argument (function expected)");
 
             /*  apply effect  */
             var pageCo = $("> .jquery-page-container", self.root);
@@ -148,22 +150,26 @@
                     $(pageCo)
                         .css("width", "")
                         .removeClass("jquery-page-shake");
+                    if (typeof complete === "function")
+                        complete.call(this);
                 });
 
             return this;
         },
 
         /*  API method: transition to a particular page element  */
-        transition: function (pageId, transition) {
+        transition: function (pageId, transition, complete) {
             var self = this;
 
             /*  sanity check arguments  */
-            if (arguments.length === 0)
-                throw new Error("missing page id");
-            else if (arguments.length === 1 && typeof pageId !== "string")
+            if (arguments.length < 2 || arguments.length > 3)
+                throw new Error("invalid number of arguments (2 or 3 expected)");
+            else if (typeof pageId !== "string")
                 throw new Error("invalid page id argument (string expected)");
-            else if (arguments.length === 2 && typeof transition !== "string")
+            else if (typeof transition !== "string")
                 throw new Error("invalid transition type argument (string expected)");
+            else if (arguments.length === 3 && typeof complete !== "function")
+                throw new Error("invalid complete argument (function expected)");
 
             /*  get page container  */
             var pageCo = $("> .jquery-page-container", self.root);
@@ -196,6 +202,8 @@
                 $(pageTo)
                     .removeClass("jquery-page-disabled")
                     .addClass("jquery-page-active");
+                if (typeof complete === "function")
+                    complete.call(this, pageId);
             }
             else if ((m = transition.match(/^slide-in-from-(left|right)$/)) !== null) {
                 /*  TRANSITION: slide in from left/right  */
@@ -230,6 +238,8 @@
                             .css("left", "")
                             .removeClass("jquery-page-horizontal")
                             .removeClass("jquery-page-slide");
+                        if (typeof complete === "function")
+                            complete.call(this, pageId);
                     });
             }
             else if ((m = transition.match(/^slide-in-from-(top|bottom)$/)) !== null) {
@@ -265,6 +275,8 @@
                             .removeClass("jquery-page-slide")
                             .css("transform", "")
                             .css("top", 0);
+                        if (typeof complete === "function")
+                            complete.call(this, pageId);
                     });
             }
             else if ((m = transition.match(/^flip-towards-(left|right)$/)) !== null) {
@@ -296,6 +308,8 @@
                             .css("width", "")
                             .removeClass("jquery-page-stacked")
                             .removeClass("jquery-page-flip-" + to);
+                        if (typeof complete === "function")
+                            complete.call(this, pageId);
                     });
             }
             else
