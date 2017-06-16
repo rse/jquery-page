@@ -1,6 +1,6 @@
 {
     "name": "jquery-page",
-    "version": "0.9.4",
+    "version": "0.9.5",
     "description": "jQuery Page Transitions for HTML5 Single-Page-Apps",
     "main": "jquery.page.js",
     "homepage": "https://github.com/rse/jquery-page",
