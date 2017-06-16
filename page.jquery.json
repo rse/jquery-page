@@ -2,7 +2,7 @@
     "name": "page",
     "title": "jQuery Page",
     "description": "jQuery Page Transitions for HTML5 Single-Page-Apps",
-    "version": "0.9.4",
+    "version": "0.9.5",
     "author": {
         "name": "Ralf S. Engelschall",
         "email": "rse@engelschall.com",
