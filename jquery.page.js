@@ -193,7 +193,7 @@
             var pageHeight = $(self.root).height();
 
             /*  dispatch according to transition type  */
-            var m, to;
+            var m, to, handler;
             if (transition === "none") {
                 /*  TRANSITION: none at all (just switch instantly)  */
                 $(pageFr)
@@ -219,28 +219,32 @@
                     .width(pageWidth)
                     .addClass(to === "left" ? "jquery-page-left" : "jquery-page-right")
                     .removeClass("jquery-page-disabled");
+                handler = function (ev) {
+                    if (ev.target !== this)
+                        return;
+                    $(pageFr)
+                        .addClass("jquery-page-disabled")
+                        .removeClass(to === "left" ? "jquery-page-right" : "jquery-page-left")
+                        .removeClass("jquery-page-active")
+                        .css("width", "");
+                    $(pageTo)
+                        .removeClass(to === "left" ? "jquery-page-left" : "jquery-page-right")
+                        .addClass("jquery-page-active")
+                        .css("width", "");
+                    $(pageCo)
+                        .css("width", "")
+                        .css("transform", "")
+                        .css("left", "")
+                        .removeClass("jquery-page-horizontal")
+                        .removeClass("jquery-page-slide");
+                    if (typeof complete === "function")
+                        complete.call(this, pageId);
+                    $(pageCo).off("transitionend", handler);
+                };
                 $(pageCo)
                     .addClass("jquery-page-slide")
                     .css("transform", "translate(" + (to === "left" ? "" : "-") + pageWidth + "px,0)")
-                    .one("transitionend", function () {
-                        $(pageFr)
-                            .addClass("jquery-page-disabled")
-                            .removeClass(to === "left" ? "jquery-page-right" : "jquery-page-left")
-                            .removeClass("jquery-page-active")
-                            .css("width", "");
-                        $(pageTo)
-                            .removeClass(to === "left" ? "jquery-page-left" : "jquery-page-right")
-                            .addClass("jquery-page-active")
-                            .css("width", "");
-                        $(pageCo)
-                            .css("width", "")
-                            .css("transform", "")
-                            .css("left", "")
-                            .removeClass("jquery-page-horizontal")
-                            .removeClass("jquery-page-slide");
-                        if (typeof complete === "function")
-                            complete.call(this, pageId);
-                    });
+                    .one("transitionend", handler);
             }
             else if ((m = transition.match(/^slide-in-from-(top|bottom)$/)) !== null) {
                 /*  TRANSITION: slide in from top/bottom  */
@@ -256,28 +260,32 @@
                     .addClass(to === "top" ? "jquery-page-top" : "jquery-page-bottom")
                     .removeClass("jquery-page-disabled")
                     .height(pageHeight);
+                handler = function (ev) {
+                    if (ev.target !== this)
+                        return;
+                    $(pageFr)
+                        .addClass("jquery-page-disabled")
+                        .removeClass(to === "top" ? "jquery-page-bottom" : "jquery-page-top")
+                        .removeClass("jquery-page-active")
+                        .css("height", "");
+                    $(pageTo)
+                        .removeClass(to === "top" ? "jquery-page-top" : "jquery-page-bottom")
+                        .addClass("jquery-page-active")
+                        .css("height", "");
+                    $(pageCo)
+                        .css("height", "")
+                        .removeClass("jquery-page-vertical")
+                        .removeClass("jquery-page-slide")
+                        .css("transform", "")
+                        .css("top", 0);
+                    if (typeof complete === "function")
+                        complete.call(this, pageId);
+                    $(pageCo).off("transitionend", handler);
+                };
                 $(pageCo)
                     .addClass("jquery-page-slide")
                     .css("transform", "translate(0," + (to === "top" ? "" : "-") + pageHeight + "px)")
-                    .one("transitionend", function () {
-                        $(pageFr)
-                            .addClass("jquery-page-disabled")
-                            .removeClass(to === "top" ? "jquery-page-bottom" : "jquery-page-top")
-                            .removeClass("jquery-page-active")
-                            .css("height", "");
-                        $(pageTo)
-                            .removeClass(to === "top" ? "jquery-page-top" : "jquery-page-bottom")
-                            .addClass("jquery-page-active")
-                            .css("height", "");
-                        $(pageCo)
-                            .css("height", "")
-                            .removeClass("jquery-page-vertical")
-                            .removeClass("jquery-page-slide")
-                            .css("transform", "")
-                            .css("top", 0);
-                        if (typeof complete === "function")
-                            complete.call(this, pageId);
-                    });
+                    .one("transitionend", handler);
             }
             else if ((m = transition.match(/^flip-towards-(left|right)$/)) !== null) {
                 /*  TRANSITION: flip towards left/right  */
@@ -292,25 +300,29 @@
                     .addClass("jquery-page-back")
                     .removeClass("jquery-page-disabled")
                     .width(pageWidth);
+                handler = function (ev) {
+                    if (ev.target !== this)
+                        return;
+                    $(pageFr)
+                        .addClass("jquery-page-disabled")
+                        .removeClass("jquery-page-front")
+                        .removeClass("jquery-page-active")
+                        .css("width", "");
+                    $(pageTo)
+                        .removeClass("jquery-page-back")
+                        .addClass("jquery-page-active")
+                        .css("width", "");
+                    $(pageCo)
+                        .css("width", "")
+                        .removeClass("jquery-page-stacked")
+                        .removeClass("jquery-page-flip-" + to);
+                    if (typeof complete === "function")
+                        complete.call(this, pageId);
+                    $(pageCo).off("transitionend", handler);
+                };
                 $(pageCo)
                     .addClass("jquery-page-flip-" + to)
-                    .one("transitionend", function () {
-                        $(pageFr)
-                            .addClass("jquery-page-disabled")
-                            .removeClass("jquery-page-front")
-                            .removeClass("jquery-page-active")
-                            .css("width", "");
-                        $(pageTo)
-                            .removeClass("jquery-page-back")
-                            .addClass("jquery-page-active")
-                            .css("width", "");
-                        $(pageCo)
-                            .css("width", "")
-                            .removeClass("jquery-page-stacked")
-                            .removeClass("jquery-page-flip-" + to);
-                        if (typeof complete === "function")
-                            complete.call(this, pageId);
-                    });
+                    .one("transitionend", handler);
             }
             else
                 throw new Error("invalid transition type");
