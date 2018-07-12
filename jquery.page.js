@@ -143,16 +143,20 @@
             /*  apply effect  */
             var pageCo = $("> .jquery-page-container", self.root);
             var pageWidth  = $(self.root).width();
+            var handler = function (ev) {
+                if (ev.target !== this)
+                    return;
+                $(pageCo)
+                    .css("width", "")
+                    .removeClass("jquery-page-shake");
+                if (typeof complete === "function")
+                    complete.call(this);
+                $(pageCo).off("animationend", handler);
+            };
             $(pageCo)
                 .width(pageWidth)
                 .addClass("jquery-page-shake")
-                .one("animationend", function () {
-                    $(pageCo)
-                        .css("width", "")
-                        .removeClass("jquery-page-shake");
-                    if (typeof complete === "function")
-                        complete.call(this);
-                });
+                .on("animationend", handler);
 
             return this;
         },
@@ -244,7 +248,7 @@
                 $(pageCo)
                     .addClass("jquery-page-slide")
                     .css("transform", "translate(" + (to === "left" ? "" : "-") + pageWidth + "px,0)")
-                    .one("transitionend", handler);
+                    .on("transitionend", handler);
             }
             else if ((m = transition.match(/^slide-in-from-(top|bottom)$/)) !== null) {
                 /*  TRANSITION: slide in from top/bottom  */
@@ -285,7 +289,7 @@
                 $(pageCo)
                     .addClass("jquery-page-slide")
                     .css("transform", "translate(0," + (to === "top" ? "" : "-") + pageHeight + "px)")
-                    .one("transitionend", handler);
+                    .on("transitionend", handler);
             }
             else if ((m = transition.match(/^flip-towards-(left|right)$/)) !== null) {
                 /*  TRANSITION: flip towards left/right  */
@@ -322,7 +326,7 @@
                 };
                 $(pageCo)
                     .addClass("jquery-page-flip-" + to)
-                    .one("transitionend", handler);
+                    .on("transitionend", handler);
             }
             else
                 throw new Error("invalid transition type");
