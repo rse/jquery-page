@@ -6,7 +6,7 @@
     "homepage": "https://github.com/rse/jquery-page",
     "license": "MIT",
     "authors": [
-        "Ralf S. Engelschall <rse@engelschall.com>"
+        "Dr. Ralf S. Engelschall <rse@engelschall.com>"
     ],
     "keywords": [
         "page", "transition", "slide", "flip"
